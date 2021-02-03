@@ -3,7 +3,6 @@ server:
  
 eureka:
   client:
-    registerWithEureka: false
     serviceUrl:
       defaultZone: http://localhost:8761/eureka 
 
@@ -13,14 +12,18 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: EU-SERVICE
+      - id: euModule
         uri: lb://EU-SERVICE #Service name in the service registry
         predicates:
         - Path=/eu/**
-      - id: USA-SERVICE
+      - id: usaModule
         uri: lb://USA-SERVICE
         predicates:
         - Path=/usa/**
+      - id: chinaModule
+        uri: lb://CHINA-SERVICE
+        predicates:
+        - Path=/china/**
       loadbalancer:
         ribbon:
           enabled: true
