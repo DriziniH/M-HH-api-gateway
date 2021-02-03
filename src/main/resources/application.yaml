@@ -1,0 +1,26 @@
+server:
+  port: 8080
+ 
+eureka:
+  client:
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka 
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+      - id: EU-SERVICE
+        uri: lb://EU-SERVICE #Service name in the service registry
+        predicates:
+        - Path=/eu/**
+      - id: USA-SERVICE
+        uri: lb://USA-SERVICE
+        predicates:
+        - Path=/usa/**
+      loadbalancer:
+        ribbon:
+          enabled: true
