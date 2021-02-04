@@ -1,9 +1,10 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.155.1/containers/javascript-node/.devcontainer/base.Dockerfile
+# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.155.1/containers/java-8/.devcontainer/base.Dockerfile
 
-# [Choice] Node.js version: 14, 12, 10
-ARG VARIANT="14-buster"
-FROM openjdk:8
-ADD 
+FROM mcr.microsoft.com/vscode/devcontainers/java:0-8
+WORKDIR /
+ADD api-gateway.jar api-gateway.jar
+EXPOSE 8761
+ENTRYPOINT [ "java", "-jar", "api-gateway.jar" ]
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
