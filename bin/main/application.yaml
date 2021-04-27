@@ -1,6 +1,6 @@
 server:
-  port: 8080
- 
+  port: 8762
+
 eureka:
   client:
     serviceUrl:
@@ -13,17 +13,13 @@ spring:
     gateway:
       routes:
       - id: euModule
-        uri: lb://EU-SERVICE #Service name in the service registry
+        uri: lb://EU-GRAPHQL-SERVICE #Service name in the service registry
         predicates:
         - Path=/eu/**
       - id: usaModule
-        uri: lb://USA-SERVICE
+        uri: lb://USA-GRAPHQL-SERVICE
         predicates:
         - Path=/usa/**
-      - id: chinaModule
-        uri: lb://CHINA-SERVICE
-        predicates:
-        - Path=/china/**
       loadbalancer:
         ribbon:
           enabled: true
